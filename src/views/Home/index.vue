@@ -10,6 +10,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { HomeStore } from '@/store/modules/home'
+import webRequest from '@/api/webRequest'
 @Component
 export default class Home extends Vue {
   title = '首页'
@@ -24,8 +25,10 @@ export default class Home extends Vue {
     this.$router.push('/home')
   }
 
-  mounted() {
+  async mounted() {
     HomeStore.GET_USERNAME()
+    const res = await webRequest.getCity('guess')
+    console.log(res.pinyin)
   }
 }
 </script>
