@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { HomeStore } from '@/store/modules/home'
-import webRequest from '@/api/webRequest'
+import webRequest from '@/api/webRequest/index'
 @Component
 export default class Home extends Vue {
   title = '首页'
@@ -27,8 +27,16 @@ export default class Home extends Vue {
 
   async mounted() {
     HomeStore.GET_USERNAME()
-    const res = await webRequest.getCity('guess')
-    console.log(res.pinyin)
+    const data = await webRequest.getCity('guess')
+    // console.log(res.pinyin)
+    // TODO: 不检测当前代码的驼峰
+    /* eslint-disable @typescript-eslint/camelcase */
+    const res = await webRequest.postE({
+      name: '热销榜',
+      description: '很好',
+      restaurant_id: 1
+    })
+    console.log(res.sussess)
   }
 }
 </script>

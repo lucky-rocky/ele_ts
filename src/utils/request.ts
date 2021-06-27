@@ -52,7 +52,7 @@ instance.interceptors.response.use(
   }
 )
 
-// TODO: 封装请求GET, POST
+// GET
 function requestGet<T>(url: string, params?: object) {
   let urlStr: string
   if (params) {
@@ -69,6 +69,14 @@ function requestGet<T>(url: string, params?: object) {
   return instance.get<T, Promise<T>>(urlStr)
 }
 
+// POST
+function requestPost<T>(url: string, data?: object) {
+  return instance.post<T, Promise<T>>(url, data)
+}
+
+// others...
+
 export default {
-  requestGet
+  requestGet,
+  requestPost
 }
